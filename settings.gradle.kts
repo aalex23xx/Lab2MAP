@@ -1,1 +1,3 @@
-rootProject.name = "Lab2"
+rootProject.name = "toy-interpreter"
+
+include("app")
