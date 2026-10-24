@@ -1,8 +1,12 @@
 
 package interpreter;
 
+import interpreter.view.View;
+
 public class Main {
+
     public static void main(String[] args) {
-        System.out.println("Toy Language Interpreter");
+        View view = new View();
+        view.run();
     }
 }
