@@ -19,4 +19,12 @@ public class MyListTest {
         assertEquals(10, list.get(1));
         assertEquals(2, list.size());
     }
+
+    @Test
+    void testInvalidIndex() {
+        MyList<Integer> list = new MyList<>();
+
+        assertThrows(ADTException.class, () -> list.get(0));
+    }
+
 }
