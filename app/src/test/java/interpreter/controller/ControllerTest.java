@@ -31,7 +31,7 @@ public class ControllerTest {
         );
 
         Controller controller = new Controller(
-                new Repository(state), false
+                new Repository(state, "log-test.txt"), false // A3
         );
 
         controller.oneStep(state);
@@ -47,7 +47,7 @@ public class ControllerTest {
         state.getExeStack().pop();
 
         Controller controller = new Controller(
-                new Repository(state), false
+                new Repository(state, "log-test.txt"), false // A3
         );
 
         assertThrows(StatementException.class,
@@ -60,7 +60,7 @@ public class ControllerTest {
         PrgState state = createState(examples.ex1);
 
         Controller controller = new Controller(
-                new Repository(state), false
+                new Repository(state, "log-test.txt"), false // A3
         );
 
         controller.allStep();
@@ -75,7 +75,7 @@ public class ControllerTest {
         PrgState state = createState(examples.ex2);
 
         Controller controller = new Controller(
-                new Repository(state), false
+                new Repository(state, "log-test.txt"), false // A3
         );
 
         controller.allStep();
@@ -90,7 +90,7 @@ public class ControllerTest {
         PrgState state = createState(examples.ex3);
 
         Controller controller = new Controller(
-                new Repository(state), false
+                new Repository(state, "log-test.txt"), false // A3
         );
 
         controller.allStep();

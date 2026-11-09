@@ -115,4 +115,31 @@ public class PrgState {
                 "\nOut: " + out +
                 "\nFileTable: " + fileTable; // A3
     }
+
+
+    // A3: Converts the program state into text for the log file
+    public String toLogString() {
+
+        var sb = new StringBuilder();
+
+        // A3: Writes ExeStack, top element first
+        sb.append("ExeStack:\n");
+        exeStack.toList().forEach(s -> sb.append(s).append('\n'));
+
+        // A3: Writes variable names and their values
+        sb.append("SymTable:\n");
+        symTable.toMap().forEach((k, v) ->
+                sb.append(k).append(" --> ").append(v).append('\n'));
+
+        // A3: Writes the output values in order
+        sb.append("Out:\n");
+        out.toList().forEach(v -> sb.append(v).append('\n'));
+
+        // A3: Writes the names of opened files
+        sb.append("FileTable:\n");
+        fileTable.toMap().keySet().forEach(f -> sb.append(f.val()).append('\n'));
+
+        return sb.toString();
+    }
+
 }

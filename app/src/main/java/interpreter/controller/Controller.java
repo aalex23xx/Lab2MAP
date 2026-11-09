@@ -44,6 +44,9 @@ public class Controller {
         // Gets the current program state from Repository
         PrgState prg = repo.getCrtPrg();
 
+        // A3: Saves the initial program state to the log file
+        repo.logPrgStateExec();
+
         // Displays the initial state if enabled
         if (displayFlag)
             display(prg);
@@ -51,6 +54,9 @@ public class Controller {
         // Executes statements one by one until the stack is empty
         while (!prg.getExeStack().isEmpty()) {
             oneStep(prg);
+
+            // A3: Saves the program state after each execution step
+            repo.logPrgStateExec();
 
             // Displays the state
             if (displayFlag)

@@ -16,7 +16,8 @@ public class RepositoryTest {
         // A3: Creates the program state using the factory method
         PrgState state = PrgState.of(new NopStmt());
 
-        Repository repository = new Repository(state);
+        // A3: Repository now requires a log file path
+        Repository repository = new Repository(state, "log-test.txt");
 
         assertSame(state, repository.getCrtPrg());
     }

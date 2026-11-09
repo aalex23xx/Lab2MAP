@@ -75,8 +75,9 @@ public class View {
                 // A3: Creates the program state using the factory method
                 PrgState state = PrgState.of(program);
 
+                // A3: Creates a separate log file for each example
                 Controller controller = new Controller(
-                        new Repository(state), true
+                        new Repository(state, "log" + selected + ".txt"), true
                 );
 
                 try {
