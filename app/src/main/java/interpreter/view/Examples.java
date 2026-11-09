@@ -6,15 +6,24 @@ import interpreter.model.exp.*;
 import interpreter.model.type.*;
 import interpreter.model.value.*;
 
+
 public class Examples {
 
     // Ex1: int v; v = 2; print(v)
 
     public IStmt ex1 = new CompStmt(
+
+            // v with default value 0
             new VarDeclStmt("v", new IntType()),
+
+            // assignment and print
             new CompStmt(
+
+                    // constant value 2 to v
                     new AssignStmt("v",
                             new ValueExp(new IntValue(2))),
+
+                    // Print
                     new PrintStmt(new VarExp("v"))
             )
     );
@@ -22,26 +31,45 @@ public class Examples {
     // Ex2: int a; int b; a = 2 + 3 * 5; b = a + 1; print(b)
 
     public IStmt ex2 = new CompStmt(
+
+            // a with default value 0
             new VarDeclStmt("a", new IntType()),
+
             new CompStmt(
+
+                    //b with default value 0
                     new VarDeclStmt("b", new IntType()),
+
                     new CompStmt(
+
+                            // result of 2 + 3 * 5 -> a
                             new AssignStmt("a",
+
+                                    // 2 to the result of 3 * 5
                                     new ArithExp(ArithOp.ADD,
                                             new ValueExp(new IntValue(2)),
+
+                                            // 3 * 5 = 15
                                             new ArithExp(ArithOp.MUL,
                                                     new ValueExp(new IntValue(3)),
                                                     new ValueExp(new IntValue(5))
                                             )
                                     )
                             ),
+
                             new CompStmt(
+
+                                    // Assigns a + 1 to b (17 + 1 = 18)
                                     new AssignStmt("b",
+
+                                            // Reads a from SymTable and adds 1
                                             new ArithExp(ArithOp.ADD,
                                                     new VarExp("a"),
                                                     new ValueExp(new IntValue(1))
                                             )
                                     ),
+
+                                    // Prints b
                                     new PrintStmt(new VarExp("b"))
                             )
                     )
@@ -52,20 +80,39 @@ public class Examples {
     // if a then v = 2 else v = 3; print(v)
 
     public IStmt ex3 = new CompStmt(
+
+            //false to start
             new VarDeclStmt("a", new BoolType()),
+
             new CompStmt(
+
+                    //  v with default value 0
                     new VarDeclStmt("v", new IntType()),
+
                     new CompStmt(
+
+                            // true to boolean variable a
                             new AssignStmt("a",
                                     new ValueExp(new BoolValue(true))),
+
                             new CompStmt(
+
+                                    // Evaluates a and selects the correct branch
                                     new IfStmt(
+
+                                            // Reads the boolean value of a
                                             new VarExp("a"),
+
+                                            // THEN: assigns 2 to v if a is true
                                             new AssignStmt("v",
                                                     new ValueExp(new IntValue(2))),
+
+                                            // ELSE: assigns 3 to v if a is false
                                             new AssignStmt("v",
                                                     new ValueExp(new IntValue(3)))
                                     ),
+
+                                    // Prints
                                     new PrintStmt(new VarExp("v"))
                             )
                     )

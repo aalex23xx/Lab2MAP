@@ -4,37 +4,49 @@ import interpreter.exceptions.ADTException;
 import java.util.HashMap;
 import java.util.Map;
 
+// Implements the dictionary ADT using a HashMap
+// store variable names and their values
 public class MyDictionary<K, V> implements IDictionary<K, V> {
+
+
     private final Map<K, V> dictionary = new HashMap<>();
 
     @Override
     public boolean isDefined(K key) {
+        // Checks if the key exists
         return dictionary.containsKey(key);
     }
 
     @Override
     public V lookup(K key) throws ADTException {
+
         if (!isDefined(key)) {
             throw new ADTException("key not found");
         }
+
         return dictionary.get(key);
     }
 
     @Override
     public void put(K key, V value) {
+        // Add/replace key-value pair
         dictionary.put(key, value);
     }
 
     @Override
     public void update(K key, V value) throws ADTException {
+        // Cannot update a key that does not exist
         if (!isDefined(key)) {
             throw new ADTException("key not found");
         }
+
+        // Updates value
         dictionary.put(key, value);
     }
 
     @Override
     public String toString() {
+
         return dictionary.toString();
     }
 }
