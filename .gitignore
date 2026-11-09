@@ -45,3 +45,5 @@ bin/
 .idea/workspace.xml
 
 .idea/
+# A3: Ignore generated log files
+log*.txt

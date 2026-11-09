@@ -24,6 +24,9 @@ application {
 
 tasks.named<JavaExec>("run") {
     standardInput = System.`in`
+
+    // A3: Uses the project root for input and log files
+    workingDir = rootDir
 }
 
 tasks.named<Test>("test") {
