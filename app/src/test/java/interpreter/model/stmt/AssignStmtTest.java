@@ -14,12 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class AssignStmtTest {
 
     private PrgState createState() {
-        return new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        return PrgState.of(new NopStmt());
     }
 
     @Test

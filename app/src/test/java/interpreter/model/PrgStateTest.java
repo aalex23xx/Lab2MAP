@@ -13,12 +13,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class PrgStateTest {
 
     private PrgState createState() {
-        return new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        return PrgState.of(new NopStmt());
     }
 
     @Test
@@ -29,6 +26,7 @@ public class PrgStateTest {
                 new MyStack<>(),
                 new MyDictionary<>(),
                 new MyList<>(),
+                new MyDictionary<>(), // A3: FileTable
                 program
         );
 

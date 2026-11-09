@@ -1,7 +1,9 @@
+
 package interpreter.model.adt;
 
 import interpreter.exceptions.ADTException;
 import java.util.ArrayList;
+import java.util.List;
 
 // Implements the list ADT using an ArrayList
 // Used for Out to store the values produced by print statements
@@ -31,6 +33,12 @@ public class MyList<T> implements IList<T> {
     @Override
     public int size() {
         return list.size();
+    }
+
+    // A3: returns a copy of the list in insertion order
+    @Override
+    public List<T> toList() {
+        return new ArrayList<>(list);
     }
 
     @Override

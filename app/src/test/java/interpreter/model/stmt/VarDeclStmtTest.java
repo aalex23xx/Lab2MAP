@@ -15,12 +15,9 @@ public class VarDeclStmtTest {
 
     @Test
     void testDeclaration() throws MyException {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         new VarDeclStmt("x", new IntType()).execute(state);
         new VarDeclStmt("a", new BoolType()).execute(state);
@@ -31,12 +28,9 @@ public class VarDeclStmtTest {
 
     @Test
     void testAlreadyDeclared() throws MyException {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         VarDeclStmt stmt = new VarDeclStmt("x", new IntType());
         stmt.execute(state);

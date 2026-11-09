@@ -19,12 +19,9 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ControllerTest {
 
     private PrgState createState(IStmt program) {
-        return new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                program
-        );
+
+        // A3: Creates the program state using the factory method
+        return PrgState.of(program);
     }
 
     @Test

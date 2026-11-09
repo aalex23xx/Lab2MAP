@@ -12,12 +12,9 @@ public class CompStmtTest {
 
     @Test
     void testCompStmt() throws MyException {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         state.getExeStack().pop();
 

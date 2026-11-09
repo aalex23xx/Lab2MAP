@@ -2,9 +2,6 @@
 package interpreter.model.type;
 
 import interpreter.model.PrgState;
-import interpreter.model.adt.MyStack;
-import interpreter.model.adt.MyDictionary;
-import interpreter.model.adt.MyList;
 import interpreter.model.stmt.VarDeclStmt;
 import interpreter.model.value.StringValue;
 import org.junit.jupiter.api.Test;
@@ -28,13 +25,8 @@ class StringTypeTest {
         VarDeclStmt declaration =
                 new VarDeclStmt("s", new StringType());
 
-        // Creates the program state
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                declaration
-        );
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(declaration);
 
         // Executes the declaration
         declaration.execute(state);

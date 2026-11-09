@@ -15,12 +15,9 @@ public class IfStmtTest {
 
     @Test
     void testIfTrue() throws MyException {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         state.getExeStack().pop();
 
@@ -40,12 +37,9 @@ public class IfStmtTest {
 
     @Test
     void testIfFalse() throws MyException {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         state.getExeStack().pop();
 
@@ -65,12 +59,9 @@ public class IfStmtTest {
 
     @Test
     void testWrongCondition() {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         IfStmt stmt = new IfStmt(
                 new ValueExp(new IntValue(5)),

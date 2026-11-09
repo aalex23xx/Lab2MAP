@@ -1,3 +1,4 @@
+
 package interpreter.model.adt;
 
 import interpreter.exceptions.ADTException;
@@ -42,6 +43,24 @@ public class MyDictionary<K, V> implements IDictionary<K, V> {
 
         // Updates value
         dictionary.put(key, value);
+    }
+
+    // removes a key and its value from the dictionary
+    @Override
+    public void remove(K key) throws ADTException {
+
+        // Checks if the key exists
+        if (!isDefined(key)) {
+            throw new ADTException("key not found");
+        }
+
+        dictionary.remove(key);
+    }
+
+    //returns a read-only copy of the dictionary
+    @Override
+    public Map<K, V> toMap() {
+        return Map.copyOf(dictionary);
     }
 
     @Override

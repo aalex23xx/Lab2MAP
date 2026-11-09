@@ -2,7 +2,6 @@
 package interpreter.repository;
 
 import interpreter.model.PrgState;
-import interpreter.model.adt.*;
 import interpreter.model.stmt.NopStmt;
 
 import org.junit.jupiter.api.Test;
@@ -13,12 +12,9 @@ public class RepositoryTest {
 
     @Test
     void testGetCrtPrg() {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         Repository repository = new Repository(state);
 

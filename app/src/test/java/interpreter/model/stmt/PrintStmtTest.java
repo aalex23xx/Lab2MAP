@@ -14,12 +14,9 @@ public class PrintStmtTest {
 
     @Test
     void testPrint() throws MyException {
-        PrgState state = new PrgState(
-                new MyStack<>(),
-                new MyDictionary<>(),
-                new MyList<>(),
-                new NopStmt()
-        );
+
+        // A3: Creates the program state using the factory method
+        PrgState state = PrgState.of(new NopStmt());
 
         PrintStmt stmt = new PrintStmt(
                 new ValueExp(new IntValue(5))
