@@ -49,6 +49,7 @@ class CloseRFileStmtTest {
         assertFalse(state.getFileTable().isDefined(fileName));
     }
 
+
     @Test
     void testFileNotOpen() {
 
@@ -58,10 +59,15 @@ class CloseRFileStmtTest {
                 new ValueExp(new StringValue("test.in"))
         );
 
-        // A3: Cannot close a file that is not open
-        assertThrows(StatementException.class,
+        // A3: Closing a file that is not open throws an exception
+        StatementException e = assertThrows(StatementException.class,
                 () -> stmt.execute(state));
+
+        // A3: Checks that the error message is clear
+        assertNotNull(e.getMessage());
+        assertFalse(e.getMessage().isBlank());
     }
+
 
     @Test
     void testNotString() {

@@ -48,8 +48,7 @@ public class Controller {
         repo.logPrgStateExec();
 
         // Displays the initial state if enabled
-        if (displayFlag)
-            display(prg);
+        display(prg);
 
         // Executes statements one by one until the stack is empty
         while (!prg.getExeStack().isEmpty()) {
@@ -59,8 +58,7 @@ public class Controller {
             repo.logPrgStateExec();
 
             // Displays the state
-            if (displayFlag)
-                display(prg);
+            display(prg);
         }
     }
 

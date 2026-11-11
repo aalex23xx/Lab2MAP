@@ -36,6 +36,8 @@ public class View {
                 System.out.println("1. Example 1");
                 System.out.println("2. Example 2");
                 System.out.println("3. Example 3");
+                // A3: File reading example
+                System.out.println("4. Example 4");
                 System.out.print("Select: ");
 
                 if (!scanner.hasNextLine()) {
@@ -50,6 +52,9 @@ public class View {
                     selected = 2;
                 } else if (choice.equals("3")) {
                     selected = 3;
+                } else if (choice.equals("4")) {
+                    // A3: Selects Example 4
+                    selected = 4;
                 } else {
                     System.out.println("Invalid program");
                     continue;
@@ -67,6 +72,9 @@ public class View {
                     program = examples.ex2;
                 } else if (selected == 3) {
                     program = examples.ex3;
+                } else if (selected == 4) {
+                    // A3: Uses the file reading example
+                    program = examples.ex4;
                 } else {
                     System.out.println("Select a program first");
                     continue;

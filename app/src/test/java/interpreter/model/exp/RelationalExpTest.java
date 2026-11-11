@@ -67,11 +67,19 @@ class RelationalExpTest {
         IExp booleanExp = new ValueExp(new BoolValue(true));
 
         // The left operand is not an integer
-        assertThrows(ExpressionException.class,
+        ExpressionException e1 = assertThrows(ExpressionException.class,
                 () -> new RelationalExp(RelOp.LT, booleanExp, number).eval(symTable));
 
+        // A3: Checks the error message
+        assertNotNull(e1.getMessage());
+        assertFalse(e1.getMessage().isBlank());
+
         // The right operand is not an integer
-        assertThrows(ExpressionException.class,
+        ExpressionException e2 = assertThrows(ExpressionException.class,
                 () -> new RelationalExp(RelOp.LT, number, booleanExp).eval(symTable));
+
+        // A3: Checks the error message
+        assertNotNull(e2.getMessage());
+        assertFalse(e2.getMessage().isBlank());
     }
 }
