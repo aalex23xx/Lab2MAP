@@ -10,6 +10,7 @@ public class RunExampleCommand extends Command {
     private final Controller controller;
     private boolean executed = false;
 
+    // command's key/ description/ controller
     public RunExampleCommand(String key, String description, Controller controller) {
         super(key, description);
         this.controller = controller;
@@ -18,7 +19,7 @@ public class RunExampleCommand extends Command {
     @Override
     public void execute() {
 
-        // A3: Each example can run only once
+        // Each example can run only once
         if (executed) {
             System.out.println("This example has already been executed.");
             return;

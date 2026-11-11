@@ -10,6 +10,6 @@ public interface IStack<T> {
     T pop() throws ADTException;
     boolean isEmpty();
 
-    // Returns the stack elements as a list, top first (new in A3)
+    //A3: Returns the stack elements as a list - top first
     List<T> toList();
 }

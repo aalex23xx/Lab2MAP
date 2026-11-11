@@ -1,8 +1,8 @@
 
 package interpreter.model.exp;
 
-// Defines the six relational operators in Toy Language.
-// Each operator has a symbol used for displaying expressions.
+
+// Each operator has a symbol used for displaying expressions
 public enum RelOp {
     LT("<"), LE("<="), EQ("=="), NE("!="), GT(">"), GE(">=");
 

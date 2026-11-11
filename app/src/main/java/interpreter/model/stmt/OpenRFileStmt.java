@@ -17,23 +17,23 @@ public record OpenRFileStmt(IExp exp) implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws MyException {
 
-        // A3: Checks if the expression is a string
+        // string
         if (!(exp.eval(state.getSymTable()) instanceof StringValue fileName))
             throw new StatementException("openRFile: " + exp + " is not a string");
 
-        // A3: Gets the file table from the program state
+        // Gets the file table from the program state
         var fileTable = state.getFileTable();
 
-        // A3: Checks if the file is already open
+        // file already open
         if (fileTable.isDefined(fileName))
             throw new StatementException("openRFile: " + fileName + " is already open");
 
         try {
-            // A3: Opens the file for reading
+            // Opens the file for reading
             // The file stays open until closeRFile
             var reader = new BufferedReader(new FileReader(fileName.val()));
 
-            // A3: Stores the file name and reader in FileTable
+            // store the file name and reader
             fileTable.put(fileName, reader);
 
         } catch (IOException e) {

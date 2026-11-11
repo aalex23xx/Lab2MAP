@@ -9,6 +9,6 @@ public interface IList<T> {
     T get(int index) throws ADTException;
     int size();
 
-    // New in A3: returns the list elements in insertion order
+    // A3: returns the list elements in insertion order
     List<T> toList();
 }

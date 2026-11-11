@@ -31,7 +31,7 @@ public class MyStack<T> implements IStack<T> {
         return stack.isEmpty();
     }
 
-    // New in A3: returns a copy of the stack elements, top first
+    // A3: Returns the stack elements without modifying the stack
     @Override
     public List<T> toList() {
         return new ArrayList<>(stack);

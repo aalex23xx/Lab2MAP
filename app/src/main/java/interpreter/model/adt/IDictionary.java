@@ -10,9 +10,9 @@ public interface IDictionary<K, V> {
     void put(K key, V value);
     void update(K key, V value) throws ADTException;
 
-    // removes a key and its value, or throws ADTException if missing
+    // A3: remove a key and its value
     void remove(K key) throws ADTException;
 
-    // returns a read-only copy of the dictionary
+    // return a read-only copy of the dictionary
     Map<K, V> toMap();
 }

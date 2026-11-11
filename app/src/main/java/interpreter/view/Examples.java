@@ -119,37 +119,47 @@ public class Examples {
             )
     );
 
-    // A3: Ex4 reads two numbers from a file and prints them
+
+    // A3: Ex4 - Reads two integers from a file and prints them
     public IStmt ex4 = fileExample("test.in");
 
-    // A3: Creates the file reading example
+    // A3: Creates the file reading program using the given file name
     public static IStmt fileExample(String fileName) {
 
         return new CompStmt(
+                // varf = default value ""
                 new VarDeclStmt("varf", new StringType()),
 
                 new CompStmt(
+                        // Assigns the file name to varf
                         new AssignStmt("varf",
                                 new ValueExp(new StringValue(fileName))),
 
                         new CompStmt(
+                                // Opens the file stored in varf
                                 new OpenRFileStmt(new VarExp("varf")),
 
                                 new CompStmt(
+                                        // Declares integer variable varc with 0
                                         new VarDeclStmt("varc", new IntType()),
 
                                         new CompStmt(
+                                                // Reads the first integer into varc
                                                 new ReadFileStmt(new VarExp("varf"), "varc"),
 
                                                 new CompStmt(
+                                                        // Prints the first integer
                                                         new PrintStmt(new VarExp("varc")),
 
                                                         new CompStmt(
+                                                                // Reads the second integer into varc
                                                                 new ReadFileStmt(new VarExp("varf"), "varc"),
 
                                                                 new CompStmt(
+                                                                        // Print the second
                                                                         new PrintStmt(new VarExp("varc")),
 
+                                                                        // Close file and removes it from FileTable
                                                                         new CloseRFileStmt(new VarExp("varf"))
                                                                 )
                                                         )
@@ -164,27 +174,36 @@ public class Examples {
     // A3: Ex5 - int a; int b; a = 5; b = 7;
     // if (a < b) then print(a) else print(b)
     public IStmt ex5 = new CompStmt(
+            // a= default value 0
             new VarDeclStmt("a", new IntType()),
 
             new CompStmt(
+                    // b= 0
                     new VarDeclStmt("b", new IntType()),
 
                     new CompStmt(
+                            // Assign value 5 to a
                             new AssignStmt("a",
                                     new ValueExp(new IntValue(5))),
 
                             new CompStmt(
+                                    // Assign value 7 to b
                                     new AssignStmt("b",
                                             new ValueExp(new IntValue(7))),
 
+                                    // Evaluates the condition and selects the correct branch
                                     new IfStmt(
+                                            // if a < b (5 < 7 = true)
                                             new RelationalExp(
                                                     RelOp.LT,
                                                     new VarExp("a"),
                                                     new VarExp("b")
                                             ),
 
+                                            // THEN: Print a if  true
                                             new PrintStmt(new VarExp("a")),
+
+                                            // ELSE: Print b if false
                                             new PrintStmt(new VarExp("b"))
                                     )
                             )
@@ -192,3 +211,4 @@ public class Examples {
             )
     );
 }
+

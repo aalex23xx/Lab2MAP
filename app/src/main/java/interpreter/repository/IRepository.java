@@ -8,6 +8,6 @@ public interface IRepository {
 
     PrgState getCrtPrg();
 
-    // A3: Saves the current program state to a log file
+    // A3: save current program state log file
     void logPrgStateExec() throws MyException;
 }

@@ -8,18 +8,18 @@ import interpreter.model.value.BoolValue;
 import interpreter.exceptions.MyException;
 import interpreter.exceptions.ExpressionException;
 
-// Compares two integer expressions using a relational operator.
-// Returns a boolean value (true or false).
+// Compares two integer expressions using a relational operator
+// Returns true or false
 public record RelationalExp(RelOp op, IExp left, IExp right) implements IExp {
 
     @Override
     public IValue eval(IDictionary<String, IValue> symTable) throws MyException {
 
-        // Evaluates the left expression and checks if it is an integer
+        //left exp
         if (!(left.eval(symTable) instanceof IntValue(int n1)))
             throw new ExpressionException("first operand is not an integer");
 
-        // Evaluates the right expression and checks if it is an integer
+        //right exp
         if (!(right.eval(symTable) instanceof IntValue(int n2)))
             throw new ExpressionException("second operand is not an integer");
 

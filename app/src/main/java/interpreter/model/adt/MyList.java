@@ -26,7 +26,6 @@ public class MyList<T> implements IList<T> {
             throw new ADTException("Index out of bounds");
         }
 
-        // Returns the element at the specified index
         return list.get(index);
     }
 

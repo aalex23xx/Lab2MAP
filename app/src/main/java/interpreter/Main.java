@@ -24,11 +24,11 @@ public class Main {
                 examples.ex5
         );
 
-        // A3: Creates the command-based menu
+        // Creates the command-based menu
         TextMenu menu = new TextMenu();
         menu.addCommand(new ExitCommand("0", "exit"));
 
-        // A3: Creates a separate controller for each example
+        // Creates a separate controller for each example
         for (int i = 0; i < programs.size(); i++) {
 
             IStmt program = programs.get(i);
@@ -47,7 +47,6 @@ public class Main {
             ));
         }
 
-        // A3: Starts the menu
         menu.show();
     }
 }

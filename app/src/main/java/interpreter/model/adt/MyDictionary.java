@@ -45,7 +45,7 @@ public class MyDictionary<K, V> implements IDictionary<K, V> {
         dictionary.put(key, value);
     }
 
-    // removes a key and its value from the dictionary
+    //A3: remove a key and its value from the dictionary
     @Override
     public void remove(K key) throws ADTException {
 
@@ -57,7 +57,7 @@ public class MyDictionary<K, V> implements IDictionary<K, V> {
         dictionary.remove(key);
     }
 
-    //returns a read-only copy of the dictionary
+    //return a read-only copy of the dictionary
     @Override
     public Map<K, V> toMap() {
         return Map.copyOf(dictionary);

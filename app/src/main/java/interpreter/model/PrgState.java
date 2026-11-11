@@ -23,7 +23,7 @@ public class PrgState {
     // Stores the values produced by print statemeents
     private IList<IValue> out;
 
-    // A3: Stores opened files and their readers
+    // A3: Store opened files and readers
     private IDictionary<StringValue, BufferedReader> fileTable;
 
     // Keeps the original program
@@ -49,7 +49,7 @@ public class PrgState {
         exeStack.push(program);
     }
 
-    // A3: Creates a program state with four empty data structures
+    // A3: Create a program state with empty data structures
     public static PrgState of(IStmt program) {
         return new PrgState(
                 new MyStack<>(),
@@ -117,25 +117,25 @@ public class PrgState {
     }
 
 
-    // A3: Converts the program state into text for the log file
+    // A3: Converts the program state into text for log file
     public String toLogString() {
 
         var sb = new StringBuilder();
 
-        // A3: Writes ExeStack, top element first
+        // ExeStack top element first
         sb.append("ExeStack:\n");
         exeStack.toList().forEach(s -> sb.append(s).append('\n'));
 
-        // A3: Writes variable names and their values
+        // variable names and their values
         sb.append("SymTable:\n");
         symTable.toMap().forEach((k, v) ->
                 sb.append(k).append(" --> ").append(v).append('\n'));
 
-        // A3: Writes the output values in order
+        // the output values in order
         sb.append("Out:\n");
         out.toList().forEach(v -> sb.append(v).append('\n'));
 
-        // A3: Writes the names of opened files
+        // names of opened files
         sb.append("FileTable:\n");
         fileTable.toMap().keySet().forEach(f -> sb.append(f.val()).append('\n'));
 

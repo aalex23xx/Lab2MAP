@@ -38,13 +38,13 @@ public class Controller {
         return crtStmt.execute(state);
     }
 
-    // Executes the program until ExeStack becomes empty
+    // A3: Executes the program until ExeStack becomes empty
     public void allStep() throws MyException {
 
         // Gets the current program state from Repository
         PrgState prg = repo.getCrtPrg();
 
-        // A3: Saves the initial program state to the log file
+        // -Saves the initial program state to the log file
         repo.logPrgStateExec();
 
         // Displays the initial state if enabled
@@ -54,7 +54,7 @@ public class Controller {
         while (!prg.getExeStack().isEmpty()) {
             oneStep(prg);
 
-            // A3: Saves the program state after each execution step
+            // -Saves the program state after each execution step
             repo.logPrgStateExec();
 
             // Displays the state

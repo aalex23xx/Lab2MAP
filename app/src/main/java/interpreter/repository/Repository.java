@@ -18,7 +18,7 @@ public class Repository implements IRepository {
     // Stores the program states in a list
     private List<PrgState> programs = new ArrayList<>();
 
-    // A3: Stores the path of the log file
+    // A3: Stores the path
     private final String logFilePath;
 
     // Initializes the repository with a program state
@@ -35,14 +35,14 @@ public class Repository implements IRepository {
         return programs.get(0);
     }
 
-    // A3: Writes the current program state to the log file
+    // A3: Write the current program state to the log file
     @Override
     public void logPrgStateExec() throws MyException {
 
         try (var logFile = new PrintWriter(
                 new BufferedWriter(new FileWriter(logFilePath, true)))) {
 
-            // A3: Appends the program state to the log file
+            // Appends the program state to the log file
             logFile.println(getCrtPrg().toLogString());
 
         } catch (IOException e) {
