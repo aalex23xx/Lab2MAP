@@ -7,11 +7,9 @@ import interpreter.model.stmt.IStmt;
 import interpreter.exceptions.MyException;
 import interpreter.exceptions.StatementException;
 
-
 // statements from ExeStack
 
 public class Controller {
-
 
     private IRepository repo;
     private boolean displayFlag; //state
@@ -55,6 +53,18 @@ public class Controller {
             oneStep(prg);
 
             // -Saves the program state after each execution step
+            repo.logPrgStateExec();
+
+            // A4: Keeps all Heap locations reachable directly or indirectly
+            prg.getHeap().setContent(
+                    GarbageCollector.safeGarbageCollector(
+                            GarbageCollector.getAddrFromSymTable(
+                                    prg.getSymTable().toMap().values()),
+                            prg.getHeap().getContent()
+                    )
+            );
+
+            // A4: Logs the program state after garbage collection
             repo.logPrgStateExec();
 
             // Displays the state

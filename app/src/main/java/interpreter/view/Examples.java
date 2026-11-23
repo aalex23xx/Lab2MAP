@@ -6,7 +6,6 @@ import interpreter.model.exp.*;
 import interpreter.model.type.*;
 import interpreter.model.value.*;
 
-
 public class Examples {
 
     // Ex1: int v; v = 2; print(v)
@@ -31,17 +30,14 @@ public class Examples {
     // Ex2: int a; int b; a = 2 + 3 * 5; b = a + 1; print(b)
 
     public IStmt ex2 = new CompStmt(
-
             // a with default value 0
             new VarDeclStmt("a", new IntType()),
 
             new CompStmt(
-
                     //b with default value 0
                     new VarDeclStmt("b", new IntType()),
 
                     new CompStmt(
-
                             // result of 2 + 3 * 5 -> a
                             new AssignStmt("a",
 
@@ -80,23 +76,19 @@ public class Examples {
     // if a then v = 2 else v = 3; print(v)
 
     public IStmt ex3 = new CompStmt(
-
             //false to start
             new VarDeclStmt("a", new BoolType()),
 
             new CompStmt(
-
-                    //  v with default value 0
+                    // v with default value 0
                     new VarDeclStmt("v", new IntType()),
 
                     new CompStmt(
-
                             // true to boolean variable a
                             new AssignStmt("a",
                                     new ValueExp(new BoolValue(true))),
 
                             new CompStmt(
-
                                     // Evaluates a and selects the correct branch
                                     new IfStmt(
 
@@ -118,7 +110,6 @@ public class Examples {
                     )
             )
     );
-
 
     // A3: Ex4 - Reads two integers from a file and prints them
     public IStmt ex4 = fileExample("test.in");
@@ -200,7 +191,7 @@ public class Examples {
                                                     new VarExp("b")
                                             ),
 
-                                            // THEN: Print a if  true
+                                            // THEN: Print a if true
                                             new PrintStmt(new VarExp("a")),
 
                                             // ELSE: Print b if false
@@ -210,5 +201,41 @@ public class Examples {
                     )
             )
     );
-}
 
+    // A4: Ex9 - Demonstrates the unsafe garbage collector problem
+    // Ref int v; new(v, 20); Ref Ref int a; new(a, v);
+    // new(v, 30); print(rH(rH(a)))
+
+    public IStmt ex9 = new CompStmt(
+            // A4: Declares a reference to an integer
+            new VarDeclStmt("v", new RefType(new IntType())),
+
+            new CompStmt(
+                    // A4: Allocates 20 at address 1
+                    new NewStmt("v", new ValueExp(new IntValue(20))),
+
+                    new CompStmt(
+                            // A4: Declares a reference to a reference to an integer
+                            new VarDeclStmt("a",
+                                    new RefType(new RefType(new IntType()))),
+
+                            new CompStmt(
+                                    // A4: Allocates a reference to v at address 2
+                                    new NewStmt("a", new VarExp("v")),
+
+                                    new CompStmt(
+                                            // A4: Allocates 30 at address 3 and updates v
+                                            new NewStmt("v", new ValueExp(new IntValue(30))),
+
+                                            // A4: Reads the value from address 1 through a
+                                            new PrintStmt(
+                                                    new ReadHeapExp(
+                                                            new ReadHeapExp(new VarExp("a"))
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            )
+    );
+}
