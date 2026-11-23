@@ -7,24 +7,32 @@ import interpreter.model.adt.IList;
 import interpreter.model.adt.MyStack;
 import interpreter.model.adt.MyDictionary;
 import interpreter.model.adt.MyList;
+// A4: Imports the Heap interface and implementation
+import interpreter.model.adt.IHeap;
+import interpreter.model.adt.MyHeap;
 import interpreter.model.stmt.IStmt;
 import interpreter.model.value.IValue;
 import interpreter.model.value.StringValue;
 import java.io.BufferedReader;
+// A4: Sorts heap addresses when writing the log
+import java.util.TreeMap;
 
 public class PrgState {
 
     // Instructions
     private IStack<IStmt> exeStack;
 
-    // Stores variable names and theirvalues
+    // Stores variable names and their values
     private IDictionary<String, IValue> symTable;
 
-    // Stores the values produced by print statemeents
+    // Stores the values produced by print statements
     private IList<IValue> out;
 
     // A3: Store opened files and readers
     private IDictionary<StringValue, BufferedReader> fileTable;
+
+    // A4: Stores dynamically allocated values at heap addresses
+    private IHeap heap;
 
     // Keeps the original program
     private final IStmt originalProgram;
@@ -34,6 +42,7 @@ public class PrgState {
                     IDictionary<String, IValue> symTable,
                     IList<IValue> out,
                     IDictionary<StringValue, BufferedReader> fileTable,
+                    IHeap heap,
                     IStmt program) {
 
         this.exeStack = exeStack;
@@ -43,19 +52,23 @@ public class PrgState {
         // A3: Initializes the file table
         this.fileTable = fileTable;
 
+        // A4: Initializes the Heap
+        this.heap = heap;
+
         this.originalProgram = program;
 
         // Adds the program to the execution stack
         exeStack.push(program);
     }
 
-    // A3: Create a program state with empty data structures
+    // A4: Creates a program state with all five data structures
     public static PrgState of(IStmt program) {
         return new PrgState(
                 new MyStack<>(),
                 new MyDictionary<>(),
                 new MyList<>(),
                 new MyDictionary<>(),
+                new MyHeap(),
                 program
         );
     }
@@ -80,6 +93,11 @@ public class PrgState {
     // A3: Returns the file table
     public IDictionary<StringValue, BufferedReader> getFileTable() {
         return fileTable;
+    }
+
+    // A4: Returns the Heap
+    public IHeap getHeap() {
+        return heap;
     }
 
     // Returns the original program
@@ -116,7 +134,6 @@ public class PrgState {
                 "\nFileTable: " + fileTable; // A3
     }
 
-
     // A3: Converts the program state into text for log file
     public String toLogString() {
 
@@ -126,20 +143,24 @@ public class PrgState {
         sb.append("ExeStack:\n");
         exeStack.toList().forEach(s -> sb.append(s).append('\n'));
 
-        // variable names and their values
+        // Variable names and their values
         sb.append("SymTable:\n");
         symTable.toMap().forEach((k, v) ->
                 sb.append(k).append(" --> ").append(v).append('\n'));
 
-        // the output values in order
+        // The output values in order
         sb.append("Out:\n");
         out.toList().forEach(v -> sb.append(v).append('\n'));
 
-        // names of opened files
+        // Names of opened files
         sb.append("FileTable:\n");
         fileTable.toMap().keySet().forEach(f -> sb.append(f.val()).append('\n'));
 
+        // A4: Writes the Heap values sorted by address
+        sb.append("Heap:\n");
+        new TreeMap<>(heap.getContent()).forEach((address, value) ->
+                sb.append(address).append(" --> ").append(value).append('\n'));
+
         return sb.toString();
     }
-
 }

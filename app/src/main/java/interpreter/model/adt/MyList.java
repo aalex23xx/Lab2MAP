@@ -34,7 +34,7 @@ public class MyList<T> implements IList<T> {
         return list.size();
     }
 
-    // A3: returns a copy of the list in insertion order
+    // A3: Returns the list elements for logging Out in their original order
     @Override
     public List<T> toList() {
         return new ArrayList<>(list);

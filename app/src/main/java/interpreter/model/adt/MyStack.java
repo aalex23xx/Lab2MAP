@@ -31,7 +31,7 @@ public class MyStack<T> implements IStack<T> {
         return stack.isEmpty();
     }
 
-    // A3: Returns the stack elements without modifying the stack
+    // A3: Returns the stack elements for logging ExeStack without modifying it
     @Override
     public List<T> toList() {
         return new ArrayList<>(stack);

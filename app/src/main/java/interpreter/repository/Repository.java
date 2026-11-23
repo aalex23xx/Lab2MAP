@@ -12,7 +12,7 @@ import java.io.BufferedWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
 
-// Implements IRepository using an ArrayList.
+// Implements IRepository using an ArrayList
 public class Repository implements IRepository {
 
     // Stores the program states in a list

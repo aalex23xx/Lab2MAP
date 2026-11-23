@@ -27,6 +27,7 @@ public class PrgStateTest {
                 new MyDictionary<>(),
                 new MyList<>(),
                 new MyDictionary<>(), // A3: FileTable
+                new MyHeap(),         // A4: Heap
                 program
         );
 
@@ -41,6 +42,9 @@ public class PrgStateTest {
         assertFalse(state.getExeStack().isEmpty());
         assertEquals("{}", state.getSymTable().toString());
         assertEquals("[]", state.getOut().toString());
+
+        // A4: Checks that the Heap is initially empty
+        assertTrue(state.getHeap().getContent().isEmpty());
     }
 
     @Test
@@ -51,6 +55,9 @@ public class PrgStateTest {
         assertNotNull(state.getSymTable());
         assertNotNull(state.getOut());
         assertNotNull(state.getOriginalProgram());
+
+        // A4: Checks the Heap getter
+        assertNotNull(state.getHeap());
     }
 
     @Test

@@ -9,12 +9,11 @@ import interpreter.exceptions.StatementException;
 
 import java.io.IOException;
 
-// A3: Closes an opened file and removes it from FileTable
+// A3: Closes the BufferedReader and removes the file entry from the FileTable dictionary
 public record CloseRFileStmt(IExp exp) implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws MyException {
-
 
         if (!(exp.eval(state.getSymTable()) instanceof StringValue fileName))
             throw new StatementException("closeRFile: expression is not a string");

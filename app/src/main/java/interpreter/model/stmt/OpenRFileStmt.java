@@ -10,21 +10,20 @@ import interpreter.exceptions.StatementException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-
-// A3: Opens a text file and stores its reader in FileTable
+//cl rd
+// A3: Opens a text file and stores its BufferedReader in the FileTable dictionary
 public record OpenRFileStmt(IExp exp) implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws MyException {
 
-        // string
+        // string test.in
         if (!(exp.eval(state.getSymTable()) instanceof StringValue fileName))
             throw new StatementException("openRFile: " + exp + " is not a string");
 
-        // Gets the file table from the program state
+        // Get the file table from the program state
         var fileTable = state.getFileTable();
 
-        // file already open
         if (fileTable.isDefined(fileName))
             throw new StatementException("openRFile: " + fileName + " is already open");
 

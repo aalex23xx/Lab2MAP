@@ -11,14 +11,13 @@ import interpreter.exceptions.StatementException;
 
 import java.io.IOException;
 
-// A3: Reads an integer from an opened file into a variable
+// A3: Read the next integer from an opened file and stores it in a SymTable variable
 public record ReadFileStmt(IExp exp, String varName) implements IStmt {
 
     @Override
     public PrgState execute(PrgState state) throws MyException {
 
         var symTable = state.getSymTable();
-
 
         if (!symTable.isDefined(varName))
             throw new StatementException("readFile: variable is not declared");
