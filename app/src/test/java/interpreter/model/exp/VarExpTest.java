@@ -3,6 +3,7 @@ package interpreter.model.exp;
 
 import interpreter.exceptions.ExpressionException;
 import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyHeap;
 
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +15,8 @@ public class VarExpTest {
     void testUndefinedVariable() {
         VarExp exp = new VarExp("x");
 
+        // A4: Passes an empty Heap to eval
         assertThrows(ExpressionException.class,
-                () -> exp.eval(new MyDictionary<>()));
+                () -> exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 }

@@ -18,7 +18,6 @@ public class IfStmt implements IStmt {
     private IStmt thenStmt;
     private IStmt elseStmt;
 
-
     public IfStmt(IExp exp, IStmt thenStmt, IStmt elseStmt) {
         this.exp = exp;
         this.thenStmt = thenStmt;
@@ -28,8 +27,8 @@ public class IfStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws MyException {
 
-        // Evaluates the condition using SymTable
-        IValue value = exp.eval(state.getSymTable());
+        // A4: Evaluates the condition using SymTable and Heap
+        IValue value = exp.eval(state.getSymTable(), state.getHeap());
 
         if (!(value instanceof BoolValue)) {
             throw new StatementException("condition is not a boolean");

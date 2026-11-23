@@ -4,6 +4,7 @@ package interpreter.model.exp;
 import interpreter.exceptions.MyException;
 import interpreter.exceptions.ExpressionException;
 import interpreter.model.adt.IDictionary;
+import interpreter.model.adt.IHeap;
 import interpreter.model.value.IValue;
 import interpreter.model.value.BoolValue;
 
@@ -22,17 +23,18 @@ public class LogicExp implements IExp {
         this.right = right;
     }
 
+    // A4: Evaluates logical expressions using SymTable and Heap
     @Override
-    public IValue eval(IDictionary<String, IValue> symTable) throws MyException {
+    public IValue eval(IDictionary<String, IValue> symTable, IHeap heap) throws MyException {
 
-        // left operand type
-        IValue v1 = left.eval(symTable);
+        // A4: Passes Heap when evaluating the left operand
+        IValue v1 = left.eval(symTable, heap);
         if (!(v1 instanceof BoolValue)) {
             throw new ExpressionException("first operand is not a boolean");
         }
 
-        // right operand type
-        IValue v2 = right.eval(symTable);
+        // A4: Passes Heap when evaluating the right operand
+        IValue v2 = right.eval(symTable, heap);
         if (!(v2 instanceof BoolValue)) {
             throw new ExpressionException("second operand is not a boolean");
         }

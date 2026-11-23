@@ -17,8 +17,8 @@ public record OpenRFileStmt(IExp exp) implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws MyException {
 
-        // string test.in
-        if (!(exp.eval(state.getSymTable()) instanceof StringValue fileName))
+        // A4: Evaluates the file name expression using SymTable and Heap
+        if (!(exp.eval(state.getSymTable(), state.getHeap()) instanceof StringValue fileName))
             throw new StatementException("openRFile: " + exp + " is not a string");
 
         // Get the file table from the program state

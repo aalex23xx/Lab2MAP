@@ -4,6 +4,7 @@ package interpreter.model.exp;
 import interpreter.exceptions.MyException;
 import interpreter.exceptions.ExpressionException;
 import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyHeap;
 import interpreter.model.value.*;
 
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,9 @@ public class ArithExpTest {
                 new ValueExp(new IntValue(2)),
                 new ValueExp(new IntValue(3)));
 
+        // A4: Passes an empty Heap to eval
         assertEquals(new IntValue(5),
-                exp.eval(new MyDictionary<>()));
+                exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 
     @Test
@@ -28,8 +30,9 @@ public class ArithExpTest {
                 new ValueExp(new IntValue(5)),
                 new ValueExp(new IntValue(2)));
 
+        // A4: Passes an empty Heap to eval
         assertEquals(new IntValue(3),
-                exp.eval(new MyDictionary<>()));
+                exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 
     @Test
@@ -38,8 +41,9 @@ public class ArithExpTest {
                 new ValueExp(new IntValue(3)),
                 new ValueExp(new IntValue(4)));
 
+        // A4: Passes an empty Heap to eval
         assertEquals(new IntValue(12),
-                exp.eval(new MyDictionary<>()));
+                exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 
     @Test
@@ -48,8 +52,9 @@ public class ArithExpTest {
                 new ValueExp(new IntValue(10)),
                 new ValueExp(new IntValue(2)));
 
+        // A4: Passes an empty Heap to eval
         assertEquals(new IntValue(5),
-                exp.eval(new MyDictionary<>()));
+                exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 
     @Test
@@ -58,8 +63,9 @@ public class ArithExpTest {
                 new ValueExp(new IntValue(10)),
                 new ValueExp(new IntValue(0)));
 
+        // A4: Passes an empty Heap to eval
         assertThrows(ExpressionException.class,
-                () -> exp.eval(new MyDictionary<>()));
+                () -> exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 
     @Test
@@ -68,7 +74,8 @@ public class ArithExpTest {
                 new ValueExp(new BoolValue(true)),
                 new ValueExp(new IntValue(2)));
 
+        // A4: Passes an empty Heap to eval
         assertThrows(ExpressionException.class,
-                () -> exp.eval(new MyDictionary<>()));
+                () -> exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 }

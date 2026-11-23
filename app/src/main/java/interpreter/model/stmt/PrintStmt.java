@@ -11,7 +11,6 @@ import interpreter.exceptions.MyException;
 // Stores the resulting value in Out (MyList)
 public class PrintStmt implements IStmt {
 
-
     private IExp exp;
 
     // Initializes the print statement with an expression
@@ -22,8 +21,8 @@ public class PrintStmt implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws MyException {
 
-        // Evaluate the expression
-        IValue value = exp.eval(state.getSymTable());
+        // A4: Evaluates the expression using SymTable and Heap
+        IValue value = exp.eval(state.getSymTable(), state.getHeap());
 
         // Add value to output list
         state.getOut().add(value);

@@ -4,6 +4,7 @@ package interpreter.model.exp;
 import interpreter.exceptions.MyException;
 import interpreter.exceptions.ExpressionException;
 import interpreter.model.adt.MyDictionary;
+import interpreter.model.adt.MyHeap;
 import interpreter.model.value.*;
 
 import org.junit.jupiter.api.Test;
@@ -18,8 +19,9 @@ public class LogicExpTest {
                 new ValueExp(new BoolValue(true)),
                 new ValueExp(new BoolValue(false)));
 
+        // A4: Passes an empty Heap to eval
         assertEquals(new BoolValue(false),
-                exp.eval(new MyDictionary<>()));
+                exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 
     @Test
@@ -28,8 +30,9 @@ public class LogicExpTest {
                 new ValueExp(new BoolValue(true)),
                 new ValueExp(new BoolValue(false)));
 
+        // A4: Passes an empty Heap to eval
         assertEquals(new BoolValue(true),
-                exp.eval(new MyDictionary<>()));
+                exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 
     @Test
@@ -38,7 +41,8 @@ public class LogicExpTest {
                 new ValueExp(new IntValue(5)),
                 new ValueExp(new BoolValue(true)));
 
+        // A4: Passes an empty Heap to eval
         assertThrows(ExpressionException.class,
-                () -> exp.eval(new MyDictionary<>()));
+                () -> exp.eval(new MyDictionary<>(), new MyHeap()));
     }
 }
