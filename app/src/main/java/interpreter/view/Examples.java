@@ -201,33 +201,156 @@ public class Examples {
                     )
             )
     );
-
-    // A4: Ex9 - Demonstrates the unsafe garbage collector problem
+    // A4: Ex6 - Heap allocation with nested reference types
     // Ref int v; new(v, 20); Ref Ref int a; new(a, v);
-    // new(v, 30); print(rH(rH(a)))
+    // print(v); print(a)
 
-    public IStmt ex9 = new CompStmt(
-            // A4: Declares a reference to an integer
+    public IStmt ex6 = new CompStmt(
+            // Declares a reference to an integer
             new VarDeclStmt("v", new RefType(new IntType())),
 
             new CompStmt(
-                    // A4: Allocates 20 at address 1
+                    // Allocates 20 at address 1 and updates v
                     new NewStmt("v", new ValueExp(new IntValue(20))),
 
                     new CompStmt(
-                            // A4: Declares a reference to a reference to an integer
+                            // Declares a reference to another reference
                             new VarDeclStmt("a",
                                     new RefType(new RefType(new IntType()))),
 
                             new CompStmt(
-                                    // A4: Allocates a reference to v at address 2
+                                    // Stores the reference value of v at address 2
                                     new NewStmt("a", new VarExp("v")),
 
                                     new CompStmt(
-                                            // A4: Allocates 30 at address 3 and updates v
+                                            // Prints the reference (1, int)
+                                            new PrintStmt(new VarExp("v")),
+
+                                            // Prints the nested reference (2, Ref(int))
+                                            new PrintStmt(new VarExp("a"))
+                                    )
+                            )
+                    )
+            )
+    );
+
+
+
+// A4: Ex7 - Reads values from Heap using rH
+// Ref int v; new(v, 20); Ref Ref int a; new(a, v);
+// print(rH(v)); print(rH(rH(a)) + 5)
+
+    public IStmt ex7 = new CompStmt(
+            //  Declares a reference to an integer
+            new VarDeclStmt("v", new RefType(new IntType())),
+
+            new CompStmt(
+                    // Allocates 20 at address 1
+                    new NewStmt("v", new ValueExp(new IntValue(20))),
+
+                    new CompStmt(
+                            // Declares a nested reference
+                            new VarDeclStmt("a",
+                                    new RefType(new RefType(new IntType()))),
+
+                            new CompStmt(
+                                    // Stores the reference value of v at address 2
+                                    new NewStmt("a", new VarExp("v")),
+
+                                    new CompStmt(
+                                            // Reads and prints the value 20 from Heap
+                                            new PrintStmt(
+                                                    new ReadHeapExp(new VarExp("v"))
+                                            ),
+
+                                            // Reads 20 through a and adds 5
+                                            new PrintStmt(
+                                                    new ArithExp(
+                                                            ArithOp.ADD,
+
+                                                            // Follows two levels of references
+                                                            new ReadHeapExp(
+                                                                    new ReadHeapExp(
+                                                                            new VarExp("a")
+                                                                    )
+                                                            ),
+
+                                                            // Adds 5 to the retrieved value
+                                                            new ValueExp(new IntValue(5))
+                                                    )
+                                            )
+                                    )
+                            )
+                    )
+            )
+    );
+
+
+
+// A4: Ex8 - Updates a value in Heap using wH
+// Ref int v; new(v, 20); print(rH(v));
+// wH(v, 30); print(rH(v) + 5)
+
+    public IStmt ex8 = new CompStmt(
+            //  Declares a reference to an integer
+            new VarDeclStmt("v", new RefType(new IntType())),
+
+            new CompStmt(
+                    //  Allocates 20 at address 1
+                    new NewStmt("v", new ValueExp(new IntValue(20))),
+
+                    new CompStmt(
+                            //  Prints the initial value 20
+                            new PrintStmt(
+                                    new ReadHeapExp(new VarExp("v"))
+                            ),
+
+                            new CompStmt(
+                                    // Updates the Heap value to 30 without changing the address
+                                    new WriteHeapStmt("v",
+                                            new ValueExp(new IntValue(30))),
+
+                                    //  Reads the updated value and adds 5
+                                    new PrintStmt(
+                                            new ArithExp(
+                                                    ArithOp.ADD,
+                                                    new ReadHeapExp(new VarExp("v")),
+                                                    new ValueExp(new IntValue(5))
+                                            )
+                                    )
+                            )
+                    )
+            )
+    );
+
+
+
+// A4: Ex9 - Demonstrates the unsafe garbage collector problem
+// Ref int v; new(v, 20); Ref Ref int a; new(a, v);
+// new(v, 30); print(rH(rH(a)))
+
+    public IStmt ex9 = new CompStmt(
+            //  Declares a reference to an integer
+            new VarDeclStmt("v", new RefType(new IntType())),
+
+            new CompStmt(
+                    //  Allocates 20 at address 1
+                    new NewStmt("v", new ValueExp(new IntValue(20))),
+
+                    new CompStmt(
+                            //  Declares a reference to a reference to an integer
+                            new VarDeclStmt("a",
+                                    new RefType(new RefType(new IntType()))),
+
+                            new CompStmt(
+                                    //  Stores the reference value of v at address 2
+                                    new NewStmt("a", new VarExp("v")),
+
+                                    new CompStmt(
+                                            //  Allocates 30 at address 3 and updates v
                                             new NewStmt("v", new ValueExp(new IntValue(30))),
 
-                                            // A4: Reads the value from address 1 through a
+                                            //  Reads the value from address 1 through a
                                             new PrintStmt(
                                                     new ReadHeapExp(
                                                             new ReadHeapExp(new VarExp("a"))
@@ -238,4 +361,33 @@ public class Examples {
                     )
             )
     );
+
+
+
+// A4: Ex10 - Demonstrates the while statement
+// int v; v = 4; (while (v > 0) (print(v); v = v - 1)); print(v)
+
+    public static final IStmt EX10 =
+
+            //  Declares integer variable v
+            new CompStmt(new VarDeclStmt("v", new IntType()),
+
+                    // Assigns 4 to v
+                    new CompStmt(new AssignStmt("v", new ValueExp(new IntValue(4))),
+
+                            //  Executes the while statement
+                            new CompStmt(new WhileStmt(
+
+                                    //  Checks if v is greater than 0
+                                    new RelationalExp(RelOp.GT, new VarExp("v"), new ValueExp(new IntValue(0))),
+
+                                    //  Prints the current value of v
+                                    new CompStmt(new PrintStmt(new VarExp("v")),
+
+                                            //  Decreases v by 1
+                                            new AssignStmt("v", new ArithExp(ArithOp.SUB,
+                                                    new VarExp("v"), new ValueExp(new IntValue(1)))))),
+
+                                    //  Prints v after the loop finishes
+                                    new PrintStmt(new VarExp("v")))));
 }

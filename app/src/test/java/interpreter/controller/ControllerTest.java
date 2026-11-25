@@ -132,6 +132,59 @@ public class ControllerTest {
         assertTrue(state.getExeStack().isEmpty());
     }
 
+
+    // A4: Tests heap allocation and nested references
+    @Test
+    void testExample6() throws MyException {
+        PrgState state = run(new Examples().ex6);
+
+        assertEquals("[(1, int), (2, Ref(int))]",
+                state.getOut().toString());
+
+        assertTrue(state.getExeStack().isEmpty());
+    }
+
+    // A4: Tests reading values from Heap
+    @Test
+    void testExample7() throws MyException {
+        PrgState state = run(new Examples().ex7);
+
+        assertEquals("[20, 25]", state.getOut().toString());
+
+        assertTrue(state.getExeStack().isEmpty());
+    }
+
+    // A4: Tests updating values in Heap
+    @Test
+    void testExample8() throws MyException {
+        PrgState state = run(new Examples().ex8);
+
+        assertEquals("[20, 35]", state.getOut().toString());
+
+        assertTrue(state.getExeStack().isEmpty());
+    }
+
+    // A4: Tests the safe Garbage Collector
+    @Test
+    void testExample9() throws MyException {
+        PrgState state = run(new Examples().ex9);
+
+        assertEquals("[20]", state.getOut().toString());
+
+        assertTrue(state.getExeStack().isEmpty());
+    }
+
+    // A4: Tests the while statement
+    @Test
+    void testExample10() throws MyException {
+        PrgState state = run(Examples.EX10);
+
+        assertEquals("[4, 3, 2, 1, 0]", state.getOut().toString());
+
+        assertTrue(state.getExeStack().isEmpty());
+    }
+
+
     // A3: Tests Example 4 using a temporary file
     @Test
     void fileExampleReadsBothNumbersAndClosesTheFile() throws Exception {

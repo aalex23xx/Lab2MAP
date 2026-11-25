@@ -14,14 +14,14 @@ public record WhileStmt(IExp cond, IStmt body) implements IStmt {
     @Override
     public PrgState execute(PrgState state) throws MyException {
 
-        // A4: Evaluates the condition using SymTable and Heap
+        // Evaluate condition using SymTable and Heap
         IValue value = cond.eval(state.getSymTable(), state.getHeap());
 
-        // A4: Checks that the condition is boolean
+
         if (!(value instanceof BoolValue boolValue))
             throw new StatementException("while: condition is not a boolean");
 
-        // A4: Pushes the loop and its body when the condition is true
+        // Pushes the loop and its body when the condition is true
         if (boolValue.val()) {
             state.getExeStack().push(this);
             state.getExeStack().push(body);

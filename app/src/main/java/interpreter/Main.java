@@ -22,7 +22,11 @@ public class Main {
                 examples.ex3,
                 examples.ex4,
                 examples.ex5,
-                examples.ex9  // A4: Adds Ex9 to test the unsafe Garbage Collector
+                examples.ex6,  // A4: Adds Ex6
+                examples.ex7,  // A4: Adds Ex7
+                examples.ex8,  // A4: Adds Ex8
+                examples.ex9,  // A4: Tests the safe Garbage Collector
+                Examples.EX10 // A4: Adds Ex10 - WhileStmt
         );
 
         // Creates the command-based menu
@@ -35,11 +39,6 @@ public class Main {
             IStmt program = programs.get(i);
 
             int exampleNumber = i + 1;
-
-            // A4: Keeps Ex9 as option 9 and saves its log in log9.txt
-            if (i == 5) {
-                exampleNumber = 9;
-            }
 
             Repository repo = new Repository(
                     PrgState.of(program),

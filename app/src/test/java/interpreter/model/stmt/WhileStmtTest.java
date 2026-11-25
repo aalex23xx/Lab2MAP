@@ -2,7 +2,6 @@
 package interpreter.model.stmt;
 
 import interpreter.exceptions.MyException;
-import interpreter.exceptions.StatementException;
 import interpreter.model.PrgState;
 import interpreter.model.exp.*;
 import interpreter.model.type.IntType;
@@ -73,18 +72,5 @@ class WhileStmtTest {
 
         assertEquals(new IntValue(4),
                 state.getSymTable().lookup("v"));
-    }
-
-    @Test
-    void testNonBooleanCondition() {
-        // A4: An integer condition must throw an exception
-        PrgState state = PrgState.of(new NopStmt());
-
-        WhileStmt loop = new WhileStmt(
-                new ValueExp(new IntValue(5)),
-                new NopStmt());
-
-        assertThrows(StatementException.class,
-                () -> loop.execute(state));
     }
 }

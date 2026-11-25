@@ -32,7 +32,7 @@ public final class GarbageCollector {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
     }
 
-    // A4: Finds all addresses reachable directly or indirectly from SymTable
+    // Finds all addresses reachable directly or indirectly from SymTable
     public static Set<Integer> reachableAddresses(Set<Integer> roots,
                                                   Map<Integer, IValue> heap) {
 
@@ -40,43 +40,57 @@ public final class GarbageCollector {
 
         boolean changed = true;
 
-        // A4: Repeats until no new reachable addresses are found
+        // Repeats until no new reachable addresses are found
         while (changed) {
             changed = false;
 
+            // Iterates through all Heap locations
             for (Map.Entry<Integer, IValue> entry : heap.entrySet()) {
 
+                // Checks if the location is reachable and contains a reference
                 if (reachable.contains(entry.getKey())
                         && entry.getValue() instanceof RefValue ref) {
 
+                    //  Gets the address stored in the reference
                     int address = ref.address();
 
+                    // Checks if the address exists and was not already discovered
                     if (heap.containsKey(address) && !reachable.contains(address)) {
+
+                        // Adds the indirectly reachable address
                         reachable.add(address);
+
+                        // A new address was found, so another iteration is needed
                         changed = true;
                     }
                 }
             }
         }
 
+        // directly/indirectly reachable addresses
         return reachable;
     }
 
-    // A4: Keeps all reachable Heap locations
+    // Keep all reachable Heap locations
     public static Map<Integer, IValue> safeGarbageCollector(Set<Integer> roots,
                                                             Map<Integer, IValue> heap) {
 
+        // Finds all directly and indirectly reachable addresses
         Set<Integer> reachable = reachableAddresses(roots, heap);
 
+        // Creates a new map for the reachable Heap locations
         Map<Integer, IValue> result = new HashMap<>();
 
+        // Iterates through all Heap locations
         for (Map.Entry<Integer, IValue> entry : heap.entrySet()) {
 
+            // Keeps only reachable locations
             if (reachable.contains(entry.getKey())) {
                 result.put(entry.getKey(), entry.getValue());
             }
         }
 
+        // Returns the Heap without unreachable locations
         return result;
     }
 }

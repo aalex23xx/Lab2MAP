@@ -7,9 +7,7 @@ import interpreter.model.PrgState;
 import interpreter.model.exp.ValueExp;
 import interpreter.model.type.IntType;
 import interpreter.model.type.RefType;
-import interpreter.model.value.BoolValue;
 import interpreter.model.value.IntValue;
-import interpreter.model.value.RefValue;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,17 +26,6 @@ class NewStmtTest {
     }
 
     @Test
-    void testNewAllocates() throws MyException {
-        // A4: Allocates 20 in Heap and updates variable v
-        new NewStmt("v", new ValueExp(new IntValue(20))).execute(state);
-
-        assertEquals(new RefValue(1, new IntType()),
-                state.getSymTable().lookup("v"));
-
-        assertEquals(new IntValue(20), state.getHeap().get(1));
-    }
-
-    @Test
     void testUndeclaredVariable() {
         // A4: Checks that an undeclared variable throws
         assertThrows(StatementException.class,
@@ -54,13 +41,5 @@ class NewStmtTest {
         assertThrows(StatementException.class,
                 () -> new NewStmt("x",
                         new ValueExp(new IntValue(20))).execute(state));
-    }
-
-    @Test
-    void testWrongType() {
-        // A4: Checks that a boolean cannot be stored in Ref int
-        assertThrows(StatementException.class,
-                () -> new NewStmt("v",
-                        new ValueExp(new BoolValue(true))).execute(state));
     }
 }

@@ -14,18 +14,18 @@ public record ReadHeapExp(IExp exp) implements IExp {
     @Override
     public IValue eval(IDictionary<String, IValue> symTable, IHeap heap) throws MyException {
 
-        // A4: Evaluates the expression
+        // Evaluates the expression
         IValue value = exp.eval(symTable, heap);
 
-        // A4: Checks that the result is a reference
+        // Checks that the result is a reference
         if (!(value instanceof RefValue ref))
             throw new ExpressionException("rH: expression is not a reference");
 
-        // A4: Checks that the address exists in the Heap
+        // Checks that the address exists in the Heap
         if (!heap.isDefined(ref.address()))
             throw new ExpressionException("rH: address is not in the Heap");
 
-        // A4: Returns the value stored at the address
+        // Returns the value stored at the address
         return heap.get(ref.address());
     }
 

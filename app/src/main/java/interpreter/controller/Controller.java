@@ -55,7 +55,21 @@ public class Controller {
             // -Saves the program state after each execution step
             repo.logPrgStateExec();
 
+
+            // A4: Unsafe Garbage Collector - for demonstration only
+
+            /*
+            prg.getHeap().setContent(
+                    GarbageCollector.unsafeGarbageCollector(
+                            GarbageCollector.getAddrFromSymTable(
+                                    prg.getSymTable().toMap().values()),
+                            prg.getHeap().getContent()
+                    )
+            );
+            */
+
             // A4: Keeps all Heap locations reachable directly or indirectly
+            // A4: Safe Garbage Collector
             prg.getHeap().setContent(
                     GarbageCollector.safeGarbageCollector(
                             GarbageCollector.getAddrFromSymTable(

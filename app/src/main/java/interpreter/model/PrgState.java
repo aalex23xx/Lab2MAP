@@ -156,7 +156,7 @@ public class PrgState {
         sb.append("FileTable:\n");
         fileTable.toMap().keySet().forEach(f -> sb.append(f.val()).append('\n'));
 
-        // A4: Writes the Heap values sorted by address
+        // A4: Write the Heap values sorted by address
         sb.append("Heap:\n");
         new TreeMap<>(heap.getContent()).forEach((address, value) ->
                 sb.append(address).append(" --> ").append(value).append('\n'));

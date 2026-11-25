@@ -15,7 +15,7 @@ public record NewStmt(String varName, IExp exp) implements IStmt {
     public PrgState execute(PrgState state) throws MyException {
         var symTable = state.getSymTable();
 
-        // A4: Checks that the variable exists
+        // Checks that the variable exists
         if (!symTable.isDefined(varName))
             throw new StatementException("new: " + varName + " is not declared");
 
@@ -23,13 +23,13 @@ public record NewStmt(String varName, IExp exp) implements IStmt {
         if (!(symTable.lookup(varName) instanceof RefValue ref))
             throw new StatementException("new: " + varName + " is not a reference");
 
-        // A4: Evaluates the expression and checks its type
+        // Evaluates the expression and checks its type
         IValue value = exp.eval(symTable, state.getHeap());
         if (!value.getType().equals(ref.locationType()))
             throw new StatementException("new: " + exp + " has type " + value.getType()
                     + ", expected " + ref.locationType());
 
-        // A4: Allocates the value and updates the reference
+        // Allocate the value and updates the reference
         int address = state.getHeap().allocate(value);
         symTable.update(varName, new RefValue(address, ref.locationType()));
 
